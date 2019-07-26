@@ -10,11 +10,11 @@ source:
   sha256: 946b49db33b63365fb0af6ffe4849315ca54961f7cbe5a7b75082815f146268f
 
 build:
-  number: 0
+  number: 1
   script:
     - set CMAKE_GENERATOR=   # [win]
     - "{{ PYTHON }} -m pip install . -vv"
-  skip: True  # [py<37]
+  skip: True  # [py<36]
 
 requirements:
   build:
