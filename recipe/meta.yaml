@@ -1,5 +1,5 @@
 {% set name = "lfortran" %}
-{% set version = "0.1.15" %}
+{% set version = "0.6.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,46 +7,39 @@ package:
 
 source:
   url: https://lfortran.github.io/tarballs/release/{{ name }}-{{ version }}.tar.gz
-  sha256: 946b49db33b63365fb0af6ffe4849315ca54961f7cbe5a7b75082815f146268f
+  sha256: 7965189e5a66fcb4c398c6dfec767b3792a62faf72209023f0d4bbae83d9fa67
+  patches:
+    - lto.patch
 
 build:
-  number: 1
-  script:
-    - set CMAKE_GENERATOR=   # [win]
-    - "{{ PYTHON }} -m pip install . -vv"
+  number: 0
   skip: True  # [py<36]
 
 requirements:
   build:
-    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
     - cmake
-    - make   # [not win]
+    - make   # [unix]
   host:
-    - python
-    - pip
-    - scikit-build
-    - setuptools
-  run:
-    - python
-    - llvmlite
-    - antlr-python-runtime
-    - prompt_toolkit
+    - xeus >=0.24.1,<0.25
+    - llvmdev =9.0.1
+    - xtl
+    - nlohmann_json
+    - cppzmq
 
 test:
-  imports:
-    - lfortran
-  requires:
-    - pytest
   commands:
-    - pytest --pyargs lfortran
-    - lfort --help
+    - test -f ${PREFIX}/bin/lfortran  # [unix]
+    - if exist %LIBRARY_PREFIX%\bin\lfortran.exe (exit 0) else (exit 1)  # [win]
+    - lfortran --help
+    - lfortran --version
 
 about:
   home: https://lfortran.org
-  license: BSD-3
+  license: BSD-3-Clause
   license_family: BSD
   license_file: LICENSE
-  summary: 'Modern interactive LLVM-based Fortran compiler'
+  summary: Modern interactive LLVM-based Fortran compiler
   description: |
     LFortran is a modern open-source (BSD licensed) interactive Fortran
     compiler built on top of LLVM. It can execute user's code interactively to
