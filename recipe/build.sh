@@ -10,6 +10,6 @@ CXXFLAGS="${CXXFLAGS} -D__STDC_FORMAT_MACROS" cmake \
     -DWITH_XEUS=yes \
     $SRC_DIR
 
-make
+make VERBOSE=1
 
 make install
