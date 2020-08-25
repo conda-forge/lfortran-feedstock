@@ -8,6 +8,8 @@ package:
 source:
   url: https://lfortran.github.io/tarballs/release/{{ name }}-{{ version }}.tar.gz
   sha256: 7965189e5a66fcb4c398c6dfec767b3792a62faf72209023f0d4bbae83d9fa67
+  patches:
+    - lto.patch
 
 build:
   number: 0
