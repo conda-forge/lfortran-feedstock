@@ -16,7 +16,7 @@ build:
 requirements:
   build:
     - {{ compiler('cxx') }}
-    - cmake
+    - cmake =3.14.0
     - make   # [unix]
   host:
     - xeus >=0.24.1,<0.25
