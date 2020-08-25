@@ -2,7 +2,7 @@
 
 set -ex
 
-cmake \
+CXXFLAGS="-D__STDC_FORMAT_MACROS" cmake \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=$PREFIX \
     -DCMAKE_PREFIX_PATH=$PREFIX \
