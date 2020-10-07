@@ -29,10 +29,10 @@ requirements:
 
 test:
   commands:
-    - lfortran --help
-    - lfortran --version
     - test -f ${PREFIX}/bin/lfortran  # [unix]
     - if not exist %LIBRARY_PREFIX%\bin\lfortran.exe exit 1  # [win]
+    - lfortran --help
+    - lfortran --version
 
 about:
   home: https://lfortran.org
