@@ -32,7 +32,7 @@ test:
     - lfortran --help
     - lfortran --version
     - test -f ${PREFIX}/bin/lfortran  # [unix]
-    - if exist %LIBRARY_PREFIX%\bin\lfortran.exe (exit 0) else (exit 1)  # [win]
+    - if not exist %LIBRARY_PREFIX%\bin\lfortran.exe exit 1  # [win]
 
 about:
   home: https://lfortran.org
