@@ -26,6 +26,10 @@ requirements:
     - xtl
     - nlohmann_json
     - cppzmq
+  run:
+    # xeus breaks abi compatibility in patch versions even though
+    # run_exports say otherwise in https://github.com/conda-forge/xeus-feedstock/blob/0896038be810da2944ebcb612e22886815ea691e/recipe/meta.yaml#L18
+    - {{ pin_compatible("xeus", max_pin="x.x.x") }}  # [win]
 
 test:
   commands:
