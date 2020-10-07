@@ -5,9 +5,13 @@ Home: https://lfortran.org
 
 Package license: BSD-3-Clause
 
-Feedstock license: BSD-3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/lfortran-feedstock/blob/master/LICENSE.txt)
 
 Summary: Modern interactive LLVM-based Fortran compiler
+
+Development: https://gitlab.com/lfortran/lfortran
+
+Documentation: https://docs.lfortran.org/
 
 LFortran is a modern open-source (BSD licensed) interactive Fortran
 compiler built on top of LLVM. It can execute user's code interactively to

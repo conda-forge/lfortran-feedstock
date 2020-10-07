@@ -12,7 +12,7 @@ source:
     - lto.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py<36]
 
 requirements:
@@ -26,11 +26,16 @@ requirements:
     - xtl
     - nlohmann_json
     - cppzmq
+    - zlib
+  run:
+    # xeus breaks abi compatibility in patch versions even though
+    # run_exports say otherwise in https://github.com/conda-forge/xeus-feedstock/blob/0896038be810da2944ebcb612e22886815ea691e/recipe/meta.yaml#L18
+    - {{ pin_compatible("xeus", max_pin="x.x.x") }}  # [win]
 
 test:
   commands:
     - test -f ${PREFIX}/bin/lfortran  # [unix]
-    - if exist %LIBRARY_PREFIX%\bin\lfortran.exe (exit 0) else (exit 1)  # [win]
+    - if not exist %LIBRARY_PREFIX%\bin\lfortran.exe exit 1  # [win]
     - lfortran --help
     - lfortran --version
 
