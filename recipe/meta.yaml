@@ -33,11 +33,16 @@ requirements:
     - {{ pin_compatible("xeus", max_pin="x.x.x") }}  # [win]
 
 test:
+  requires:
+    - jupyter
   commands:
     - test -f ${PREFIX}/bin/lfortran  # [unix]
     - if not exist %LIBRARY_PREFIX%\bin\lfortran.exe exit 1  # [win]
     - lfortran --help
     - lfortran --version
+    - jupyter kernelspec list --json
+      # This fails if the `fortran` spec is not installed
+    - jupyter kernelspec remove -f fortran
 
 about:
   home: https://lfortran.org
