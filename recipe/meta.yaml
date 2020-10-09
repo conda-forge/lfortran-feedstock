@@ -1,5 +1,5 @@
 {% set name = "lfortran" %}
-{% set version = "0.8.1" %}
+{% set version = "0.9.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://lfortran.github.io/tarballs/release/{{ name }}-{{ version }}.tar.gz
-  sha256: f668b3174c50e3bf1e4b2c70af7a8536dc160b439b1c48a864b2c39019e743f0
+  sha256: c503e023e814356c8d6409088eb0b43276f915b9914bfa71cfc60929758f9008
   patches:
     - lto.patch
 
 build:
-  number: 2
+  number: 0
   skip: true  # [py<36]
 
 requirements:
