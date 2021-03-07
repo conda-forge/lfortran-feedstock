@@ -22,7 +22,7 @@ requirements:
     - make   # [unix]
   host:
     - xeus >=0.24.1,<0.25
-    - llvmdev =9.0.1
+    - llvmdev =11.1.0
     - xtl
     - nlohmann_json
     - cppzmq
