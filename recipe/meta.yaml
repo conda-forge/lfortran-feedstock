@@ -21,7 +21,7 @@ requirements:
     - cmake
     - make   # [unix]
   host:
-    - xeus >=0.24.1,<0.25
+    - xeus
     - llvmdev =11.1.0
     - xtl
     - nlohmann_json
