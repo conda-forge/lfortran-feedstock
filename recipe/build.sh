@@ -12,4 +12,4 @@ CXXFLAGS="${CXXFLAGS} -D__STDC_FORMAT_MACROS -D_LIBCPP_DISABLE_AVAILABILITY" cma
     -DWITH_XEUS=yes \
     $SRC_DIR
 
-cmake --build . --target install
+cmake ${CMAKE_ARGS} --build . --target install
