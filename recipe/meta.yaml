@@ -12,8 +12,8 @@ source:
     - lto.patch
 
 build:
-  number: 0
-  skip: true  # [py<36 or arm64]
+  number: 1
+  skip: true  # [py<36]
 
 requirements:
   build:
