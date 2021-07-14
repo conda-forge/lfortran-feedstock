@@ -10,10 +10,11 @@ source:
   sha256: 3bb930b24d7ca42a5cd187023a6424021be6485ca43c3e55c005563371391702
   patches:
     - lto.patch
+    - arm64.patch  # [arm64]
 
 build:
-  number: 0
-  skip: true  # [py<36 or arm64]
+  number: 1
+  skip: true  # [py<36]
 
 requirements:
   build:
