@@ -13,7 +13,7 @@ source:
     - arm64.patch  # [arm64]
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py<36]
 
 requirements:
@@ -21,6 +21,12 @@ requirements:
     - {{ compiler('cxx') }}
     - cmake
     - make   # [unix]
+    - xeus              # [build_platform != target_platform]
+    - llvmdev =11.1.0   # [build_platform != target_platform]
+    - xtl               # [build_platform != target_platform]
+    - nlohmann_json     # [build_platform != target_platform]
+    - cppzmq            # [build_platform != target_platform]
+    - zlib              # [build_platform != target_platform]
   host:
     - xeus
     - llvmdev =11.1.0
