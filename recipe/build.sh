@@ -32,6 +32,7 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" == 1 ]]; then
         -DWITH_XEUS=yes \
         -DWITH_RUNTIME_LIBRARY=yes \
         $SRC_DIR
+    make -j${CPU_COUNT}
   )
 else
   WRT=yes
