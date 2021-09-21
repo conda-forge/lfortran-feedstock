@@ -10,7 +10,6 @@ source:
   sha256: 33e1d412d71e1484cde69465d3fc224c440b166133f42e01259ff50d2ab56875
   patches:
     - lto.patch
-    - arm64.patch  # [arm64]
 
 build:
   number: 0
