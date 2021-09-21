@@ -40,6 +40,7 @@ fi
 
 mkdir build
 cd build
+export LFORTRAN_CC=${CC}
 cmake ${CMAKE_ARGS} \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_FLAGS_RELEASE="-Wall -Wextra -O3 -funroll-loops -DNDEBUG" \
