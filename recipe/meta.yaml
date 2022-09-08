@@ -19,17 +19,17 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - cmake
+    - cmake >=3.10
     - make   # [unix]
-    - xeus =1.0.1       # [build_platform != target_platform]
-    - llvmdev =11.1.0   # [build_platform != target_platform]
+    - xeus 2.4.1       # [build_platform != target_platform]
+    - llvmdev 14.0.0   # [build_platform != target_platform]
     - xtl               # [build_platform != target_platform]
     - nlohmann_json     # [build_platform != target_platform]
     - cppzmq            # [build_platform != target_platform]
     - zlib              # [build_platform != target_platform]
   host:
-    - xeus =1.0.1
-    - llvmdev =11.1.0
+    - xeus 2.4.1
+    - llvmdev 14.0.0
     - xtl
     - nlohmann_json
     - cppzmq
@@ -69,3 +69,4 @@ about:
 extra:
   recipe-maintainers:
     - certik
+    - xmnlab
