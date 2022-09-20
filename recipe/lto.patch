@@ -1,5 +1,5 @@
---- CMakeLists-ori.txt	2022-09-13 22:39:09.962176809 -0400
-+++ CMakeLists.txt	2022-09-07 22:23:30.275817040 -0400
+--- a/CMakeLists.txt	2022-09-13 22:39:09.962176809 -0400
++++ b/CMakeLists.txt	2022-09-07 22:23:30.275817040 -0400
 @@ -132,7 +132,7 @@
      #set_property(TARGET p::llvm PROPERTY INTERFACE_COMPILE_OPTIONS
      #    ${LLVM_DEFINITIONS})
