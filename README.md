@@ -195,4 +195,5 @@ Feedstock Maintainers
 =====================
 
 * [@certik](https://github.com/certik/)
+* [@xmnlab](https://github.com/xmnlab/)
 
