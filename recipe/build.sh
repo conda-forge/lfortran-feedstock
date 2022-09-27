@@ -49,6 +49,7 @@ cmake ${CMAKE_ARGS} \
     -DWITH_LLVM=yes \
     -DWITH_XEUS=yes \
     -DWITH_RUNTIME_LIBRARY=$WRT \
+    -D_POSIX_C_SOURCE=199309L \
     $SRC_DIR
 
 make -j${CPU_COUNT}
