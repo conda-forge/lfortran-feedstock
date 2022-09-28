@@ -40,7 +40,11 @@ fi
 
 mkdir build
 cd build
+
 export LFORTRAN_CC=${CC}
+export CFLAGS="${CFLAGS} -g -Wall -std=c99 -D_POSIX_SOURCE -D_GNU_SOURCE"
+export LDFLAGS="${LDFLAGS} -lpthread -lrt"
+
 cmake ${CMAKE_ARGS} \
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_CXX_FLAGS_RELEASE="-Wall -Wextra -O3 -funroll-loops -DNDEBUG" \
@@ -49,7 +53,6 @@ cmake ${CMAKE_ARGS} \
     -DWITH_LLVM=yes \
     -DWITH_XEUS=yes \
     -DWITH_RUNTIME_LIBRARY=$WRT \
-    -D_POSIX_C_SOURCE=199309L \
     $SRC_DIR
 
 make -j${CPU_COUNT}
