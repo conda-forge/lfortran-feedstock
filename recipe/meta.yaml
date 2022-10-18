@@ -64,7 +64,7 @@ about:
     compile to binaries with the goal to run user’s code on modern
     architectures such as multi-core CPUs and GPUs.
   doc_url: https://docs.lfortran.org/
-  dev_url: https://gitlab.com/lfortran/lfortran
+  dev_url: https://github.com/lfortran/lfortran
 
 extra:
   recipe-maintainers:
