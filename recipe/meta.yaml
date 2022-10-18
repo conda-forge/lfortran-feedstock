@@ -1,5 +1,5 @@
 {% set name = "lfortran" %}
-{% set version = "0.14.0" %}
+{% set version = "0.18.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://lfortran.github.io/tarballs/release/{{ name }}-{{ version }}.tar.gz
-  sha256: fc3c1d592c56ae2636065ec0228db747f154f65a0867f6311bc8091efd5c13a7
+  sha256: f796b242072d92fae36bcff2e6fddd649e89dccf877feaf99ecfab552e7e1e29
   patches:
     - lto.patch
 
@@ -21,15 +21,16 @@ requirements:
     - {{ compiler('cxx') }}
     - cmake
     - make   # [unix]
-    - xeus =1.0.1       # [build_platform != target_platform]
-    - llvmdev =11.1.0   # [build_platform != target_platform]
+    - xeus =2.4.1       # [build_platform != target_platform]
+    - llvmdev =14.0.3   # [build_platform != target_platform]
     - xtl               # [build_platform != target_platform]
     - nlohmann_json     # [build_platform != target_platform]
     - cppzmq            # [build_platform != target_platform]
     - zlib              # [build_platform != target_platform]
   host:
-    - xeus =1.0.1
-    - llvmdev =11.1.0
+    - xeus =2.4.1
+    - llvmdev =11.1.0   # [osx and x86_64]
+    - llvmdev =14.0.3   # [not osx or not x86_64]
     - xtl
     - nlohmann_json
     - cppzmq
@@ -64,7 +65,7 @@ about:
     compile to binaries with the goal to run user’s code on modern
     architectures such as multi-core CPUs and GPUs.
   doc_url: https://docs.lfortran.org/
-  dev_url: https://gitlab.com/lfortran/lfortran
+  dev_url: https://github.com/lfortran/lfortran
 
 extra:
   recipe-maintainers:
