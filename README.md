@@ -9,7 +9,7 @@ Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/lfortran-feedst
 
 Summary: Modern interactive LLVM-based Fortran compiler
 
-Development: https://gitlab.com/lfortran/lfortran
+Development: https://github.com/lfortran/lfortran
 
 Documentation: https://docs.lfortran.org/
 
