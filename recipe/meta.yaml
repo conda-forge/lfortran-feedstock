@@ -21,8 +21,9 @@ requirements:
     - {{ compiler('cxx') }}
     - cmake
     - make   # [unix]
-    - xeus =2.4.1       # [build_platform != target_platform]
-    - llvmdev =14.0.3   # [build_platform != target_platform]
+    - xeus =3.0.5       # [build_platform != target_platform]
+    - xeus-zmq =1.0.2   # [build_platform != target_platform]
+    - llvmdev =15.0.7   # [build_platform != target_platform]
     - xtl               # [build_platform != target_platform]
     - nlohmann_json     # [build_platform != target_platform]
     - cppzmq            # [build_platform != target_platform]
