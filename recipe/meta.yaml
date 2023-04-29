@@ -28,7 +28,8 @@ requirements:
     - cppzmq            # [build_platform != target_platform]
     - zlib              # [build_platform != target_platform]
   host:
-    - xeus =2.4.1
+    - xeus =3.0.5
+    - xeus-zmq =1.0.2
     - llvmdev =11.1.0   # [osx and x86_64]
     - llvmdev =14.0.3   # [not osx or not x86_64]
     - xtl
