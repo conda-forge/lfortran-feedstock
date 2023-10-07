@@ -31,6 +31,7 @@ requirements:
   host:
     - xeus =3.0.5
     - xeus-zmq =1.0.2
+    - zstd  # [x86_64]
     - llvmdev =11.1.0   # [osx and x86_64]
     - llvmdev =15.0.7   # [not osx or not x86_64]
     - xtl
