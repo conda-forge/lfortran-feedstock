@@ -33,7 +33,7 @@ requirements:
     - xeus-zmq =1.0.2
     - zstd  # [x86_64]
     - llvmdev =11.1.0   # [osx and x86_64]
-    - llvmdev =15.0.7   # [win]
+    - llvmdev =15.0.7   # [win or x86_64]
     - llvmdev =16.0.0   # [arm64]
     - xtl
     - nlohmann_json
