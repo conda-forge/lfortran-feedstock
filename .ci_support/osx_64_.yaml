@@ -21,3 +21,5 @@ zip_keys:
   - cxx_compiler_version
 zlib:
 - '1.2'
+zstd:
+- '1.5'
