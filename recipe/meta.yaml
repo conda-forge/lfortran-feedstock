@@ -21,20 +21,21 @@ requirements:
     - {{ compiler('cxx') }}
     - cmake
     - make   # [unix]
-    - xeus =3.0.5       # [arm64]
-    - xeus-zmq =1.0.2   # [arm64]
-    - llvmdev =16.0.0   # [arm64]
-    - xtl               # [arm64]
-    - nlohmann_json     # [arm64]
-    - cppzmq            # [arm64]
-    - zlib              # [arm64]
+    - xeus =3.0.5       # [osx and arm64]
+    - xeus-zmq =1.0.2   # [osx and arm64]
+    - llvmdev =16.0.0   # [osx and arm64]
+    - xtl               # [osx and arm64]
+    - nlohmann_json     # [osx and arm64]
+    - cppzmq            # [osx and arm64]
+    - zlib              # [osx and arm64]
   host:
     - xeus =3.0.5
     - xeus-zmq =1.0.2
     - zstd  # [x86_64]
+    - llvmdev =15.0.7   # [linux]
     - llvmdev =11.1.0   # [osx and x86_64]
-    - llvmdev =15.0.7   # [win or x86_64]
-    - llvmdev =16.0.0   # [arm64]
+    - llvmdev =16.0.0   # [osx and arm64]
+    - llvmdev =15.0.7   # [win]
     - xtl
     - nlohmann_json
     - cppzmq
