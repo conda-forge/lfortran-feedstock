@@ -10,7 +10,6 @@ source:
   sha256: 72a89014d51f5e4f1a51bfe02cdfb2f55459a8f0563089510803df7d80661cc4
   patches:
     - lto.patch
-    - custom.patch
 
 build:
   number: 0
