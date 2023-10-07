@@ -23,7 +23,7 @@ requirements:
     - make   # [unix]
     - xeus =3.0.5       # [build_platform != target_platform]
     - xeus-zmq =1.0.2   # [build_platform != target_platform]
-    - llvmdev =15.0.7   # [build_platform != target_platform]
+    - llvmdev =16.0.0   # [build_platform != target_platform]
     - xtl               # [build_platform != target_platform]
     - nlohmann_json     # [build_platform != target_platform]
     - cppzmq            # [build_platform != target_platform]
@@ -33,7 +33,8 @@ requirements:
     - xeus-zmq =1.0.2
     - zstd  # [x86_64]
     - llvmdev =11.1.0   # [osx and x86_64]
-    - llvmdev =15.0.7   # [not osx or not x86_64]
+    - llvmdev =15.0.7   # [win]
+    - llvmdev =16.0.0   # [build_platform != target_platform]
     - xtl
     - nlohmann_json
     - cppzmq
