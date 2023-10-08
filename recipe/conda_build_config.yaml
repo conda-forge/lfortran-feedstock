@@ -1,2 +1,2 @@
 MACOSX_SDK_VERSION:    # [osx and x86_64]
-  - 11.0.1             # [osx and x86_64]
+  - 11.3               # [osx and x86_64]
