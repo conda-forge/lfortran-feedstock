@@ -31,7 +31,7 @@ requirements:
   host:
     - xeus =3.0.5
     - xeus-zmq =1.0.2
-    - zstd  # [x86_64]
+    - zstd              # [unix]
     - llvmdev =15.0.7   # [linux]
     - llvmdev =16.0.6   # [osx and x86_64]
     - llvmdev =16.0.6   # [osx and arm64]
@@ -44,8 +44,6 @@ requirements:
     # xeus breaks abi compatibility in patch versions even though
     # run_exports say otherwise in https://github.com/conda-forge/xeus-feedstock/blob/0896038be810da2944ebcb612e22886815ea691e/recipe/meta.yaml#L18
     - {{ pin_compatible("xeus", max_pin="x.x.x") }}  # [win]
-    # Due to https://github.com/lfortran/lfortran/issues/2575
-    - {{ pin_compatible("zstd", max_pin="x.x.x") }}  # [x86_64]
 
 test:
   requires:
