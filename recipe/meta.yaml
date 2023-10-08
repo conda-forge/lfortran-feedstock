@@ -33,7 +33,7 @@ requirements:
     - xeus-zmq =1.0.2
     - zstd  # [x86_64]
     - llvmdev =15.0.7   # [linux]
-    - llvmdev =11.1.0   # [osx and x86_64]
+    - llvmdev =16.0.0   # [osx and x86_64]
     - llvmdev =16.0.0   # [osx and arm64]
     - llvmdev =15.0.7   # [win]
     - xtl
