@@ -10,6 +10,7 @@ source:
   sha256: ee4b4afefe6c6b2e85a7a51a21888ef1b00ac17414747d9e2f1ef8fc3fb5ac9f
   patches:
     - lto.patch
+    - llvm.patch
 
 build:
   number: 0
