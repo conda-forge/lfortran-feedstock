@@ -28,6 +28,7 @@ requirements:
     - nlohmann_json     # [build_platform != target_platform]
     - cppzmq            # [build_platform != target_platform]
     - zlib              # [build_platform != target_platform]
+    - zstd-static =1.5.5
   host:
     - xeus =3.0.5
     - xeus-zmq =1.0.2
@@ -37,6 +38,7 @@ requirements:
     - nlohmann_json
     - cppzmq
     - zlib
+    - zstd-static =1.5.5
   run:
     # xeus breaks abi compatibility in patch versions even though
     # run_exports say otherwise in https://github.com/conda-forge/xeus-feedstock/blob/0896038be810da2944ebcb612e22886815ea691e/recipe/meta.yaml#L18
