@@ -1,4 +1,4 @@
-MACOSX_DEPLOYMENT_TARGET:  # [osx and x86_64]
-  - "11.3"                 # [osx and x86_64]
-MACOSX_SDK_VERSION:        # [osx and x86_64]
-  - "11.3"                 # [osx and x86_64]
+c_compiler_version:            # [osx and x86_64]
+  - 15                         # [osx and x86_64]
+cxx_compiler_version:          # [osx and x86_64]
+  - 15                         # [osx and x86_64]
