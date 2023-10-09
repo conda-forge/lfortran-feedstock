@@ -12,7 +12,7 @@ source:
     - lto.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py<36]
 
 requirements:
@@ -28,7 +28,6 @@ requirements:
     - nlohmann_json     # [build_platform != target_platform]
     - cppzmq            # [build_platform != target_platform]
     - zlib              # [build_platform != target_platform]
-    - zstd-static =1.5.5
   host:
     - xeus =3.0.5
     - xeus-zmq =1.0.2
