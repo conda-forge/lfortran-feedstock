@@ -56,3 +56,5 @@ make install
 if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" == 1 ]]; then
     cp ../build-native/src/runtime/*.mod $PREFIX/share/lfortran/lib/
 fi
+
+echo "Done!!!"
