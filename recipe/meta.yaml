@@ -6,13 +6,13 @@ package:
   version: {{ version }}
 
 source:
-  url: https://lfortran.github.io/tarballs/release/{{ name }}-{{ version }}.tar.gz
+  url: https://github.com/lfortran/lfortran/releases/download/v{{ version }}/{{ name }}-{{ version }}.tar.gz
   sha256: 0378854496c0b46b1c6ea422c32ff2dd93115176bd0c9e5563e75973b015da10
   patches:
     - lto.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py<36]
 
 requirements:
@@ -73,3 +73,4 @@ about:
 extra:
   recipe-maintainers:
     - certik
+    - Shaikh-Ubaid
