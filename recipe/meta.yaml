@@ -12,7 +12,7 @@ source:
     - lto.patch
 
 build:
-  number: 2
+  number: 3
   skip: true  # [py<36]
 
 requirements:
@@ -32,8 +32,7 @@ requirements:
   host:
     - xeus =3.0.5
     - xeus-zmq =1.0.2
-    - llvmdev =16.0.6   # [osx and x86_64]
-    - llvmdev =16.0.6   # [not osx or not x86_64]
+    - llvmdev =16.0.6
     - xtl
     - nlohmann_json
     - cppzmq
