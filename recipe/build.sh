@@ -31,6 +31,7 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" == 1 ]]; then
         -DWITH_LLVM=yes \
         -DWITH_XEUS=yes \
         -DWITH_RUNTIME_LIBRARY=yes \
+        -DCMAKE_INSTALL_LIBDIR=share/lfortran/lib \
         $SRC_DIR
     make
   )
@@ -49,6 +50,7 @@ cmake ${CMAKE_ARGS} \
     -DWITH_LLVM=yes \
     -DWITH_XEUS=yes \
     -DWITH_RUNTIME_LIBRARY=$WRT \
+    -DCMAKE_INSTALL_LIBDIR=share/lfortran/lib \
     $SRC_DIR
 
 make -j${CPU_COUNT}
