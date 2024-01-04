@@ -54,5 +54,6 @@ cmake ${CMAKE_ARGS} \
 make -j${CPU_COUNT}
 make install
 if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" == 1 ]]; then
+    mkdir -p $PREFIX/share/lfortran/lib/
     cp ../build-native/src/runtime/*.mod $PREFIX/share/lfortran/lib/
 fi
