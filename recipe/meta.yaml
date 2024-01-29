@@ -1,5 +1,5 @@
 {% set name = "lfortran" %}
-{% set version = "0.32.0" %}
+{% set version = "0.33.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/lfortran/lfortran/releases/download/v{{ version }}/{{ name }}-{{ version }}.tar.gz
-  sha256: b1a636e0738a6fae1be63d332c39e9bcc842b8b3b57837b7f2e4c7be912e304f
+  sha256: 3cdfa70149ff8ff77e7f709f5f359a260bd49517df0cc954f7c6e511cefec558
 
 build:
   number: 0
