@@ -16,7 +16,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
-    - cmake
+    - cmake =3.21.1
     - make   # [unix]
     - xeus =3.0.5       # [build_platform != target_platform]
     - xeus-zmq =1.0.2   # [build_platform != target_platform]
