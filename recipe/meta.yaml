@@ -22,7 +22,7 @@ requirements:
     - xeus-zmq =1.0.2   # [build_platform != target_platform]
     - llvmdev =16.0.6   # [build_platform != target_platform]
     - xtl               # [build_platform != target_platform]
-    - nlohmann_json     # [build_platform != target_platform]
+    - nlohmann_json =3.11.2     # [build_platform != target_platform]
     - cppzmq            # [build_platform != target_platform]
     - zlib              # [build_platform != target_platform]
     - zstd-static =1.5.5  # [build_platform != target_platform]
@@ -31,7 +31,7 @@ requirements:
     - xeus-zmq =1.0.2
     - llvmdev =16.0.6
     - xtl
-    - nlohmann_json
+    - nlohmann_json =3.11.2
     - cppzmq
     - zlib
     - zstd-static =1.5.5
