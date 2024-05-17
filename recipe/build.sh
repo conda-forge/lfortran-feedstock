@@ -34,6 +34,7 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" == 1 ]]; then
         -DWITH_RUNTIME_LIBRARY=yes \
         -DWITH_RUNTIME_STACKTRACE=yes \
         -DCMAKE_INSTALL_LIBDIR=share/lfortran/lib \
+        -DWITH_TARGET_WASM=yes \
         $SRC_DIR
     make
   )
