@@ -26,6 +26,7 @@ requirements:
     - cppzmq            # [build_platform != target_platform]
     - zlib              # [build_platform != target_platform]
     - zstd-static =1.5.5  # [build_platform != target_platform]
+    - emsdk
   host:
     - xeus =3.0.5
     - xeus-zmq =1.0.2
