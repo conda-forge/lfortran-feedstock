@@ -2,9 +2,15 @@
 
 set -ex
 
+# Install WASI SDK
+export WASI_VERSION=22
+export WASI_VERSION_FULL=${WASI_VERSION}.0
+wget https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-${WASI_VERSION}/wasi-sdk-${WASI_VERSION_FULL}-linux.tar.gz
+tar xvf wasi-sdk-${WASI_VERSION_FULL}-linux.tar.gz
+export WASI_SDK_PATH=`pwd`/wasi-sdk-${WASI_VERSION_FULL}
+
 export CXXFLAGS="${CXXFLAGS} -D__STDC_FORMAT_MACROS -D_LIBCPP_DISABLE_AVAILABILITY"
 export EMSDK_PATH=${CONDA_EMSDK_DIR}
-export WASI_SDK_PATH="" # FIXME
 
 if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" == 1 ]]; then
   WRT=no
