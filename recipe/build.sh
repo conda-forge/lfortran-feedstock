@@ -33,6 +33,7 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" == 1 ]]; then
         -DWITH_RUNTIME_LIBRARY=yes \
         -DWITH_RUNTIME_STACKTRACE=yes \
         -DCMAKE_INSTALL_LIBDIR=share/lfortran/lib \
+        -DWITH_TARGET_WASM=yes \
         $SRC_DIR
     make
   )
@@ -53,6 +54,7 @@ cmake ${CMAKE_ARGS} \
     -DWITH_RUNTIME_LIBRARY=$WRT \
     -DWITH_RUNTIME_STACKTRACE=yes \
     -DCMAKE_INSTALL_LIBDIR=share/lfortran/lib \
+    -DWITH_TARGET_WASM=yes \
     $SRC_DIR
 
 make -j${CPU_COUNT}
