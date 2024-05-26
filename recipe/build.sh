@@ -2,6 +2,17 @@
 
 set -ex
 
+
+CUR_DIR=`pwd`
+cd $HOME
+curl -o wasi-sdk.tar.gz -L https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-21/wasi-sdk-21.0-macos.tar.gz
+tar -xvf wasi-sdk.tar.gz
+export WASI_SDK_PATH=$HOME/wasi-sdk-21.0
+echo $WASI_SDK_PATH
+$WASI_SDK_PATH/bin/clang --version
+
+cd $CUR_DIR
+
 export CXXFLAGS="${CXXFLAGS} -D__STDC_FORMAT_MACROS -D_LIBCPP_DISABLE_AVAILABILITY"
 
 if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" == 1 ]]; then
