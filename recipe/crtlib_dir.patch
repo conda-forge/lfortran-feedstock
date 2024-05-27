@@ -1,17 +1,48 @@
-diff --git a/src/libasr/CMakeLists.txt b/src/libasr/CMakeLists.txt
-index aaf9db92c..f74a1d630 100644
---- a/src/libasr/CMakeLists.txt
-+++ b/src/libasr/CMakeLists.txt
-@@ -13,6 +13,7 @@ if (NOT LFORTRAN_VERSION)
- endif ()
-
- configure_file(config.h.in config.h)
-+add_custom_target(lfortran_intrinsics_config ALL DEPENDS config.h)
-
- set(SRC
-     codegen/asr_to_cpp.cpp
+diff --git a/src/libasr/config.h b/src/libasr/config.h
+new file mode 100644
+index 000000000..e45e05ea7
+--- /dev/null
++++ b/src/libasr/config.h
+@@ -0,0 +1,37 @@
++#ifndef LFORTRAN_CONFIG_H
++#define LFORTRAN_CONFIG_H
++
++/* Define if you want to enable ASSERT testing in LFortran */
++#define WITH_LFORTRAN_ASSERT
++
++/* LFortran version */
++#define LFORTRAN_VERSION "0.35.0-dirty"
++#define LFORTRAN_MAJOR 0
++#define LFORTRAN_MINOR 35
++#define LFORTRAN_PATCHLEVEL 0
++
++/* Define if LLVM is enabled */
++#define HAVE_LFORTRAN_LLVM
++
++/* Define if RAPIDJSON is found */
++/* #undef HAVE_LFORTRAN_RAPIDJSON */
++
++/* Define if stacktrace is enabled */
++#define HAVE_LFORTRAN_STACKTRACE
++#define HAVE_RUNTIME_STACKTRACE
++/* #undef HAVE_LFORTRAN_BFD */
++#define HAVE_LFORTRAN_DWARFDUMP
++/* #undef HAVE_LFORTRAN_LINK */
++#define HAVE_LFORTRAN_MACHO
++#define HAVE_LFORTRAN_UNWIND
++
++/* Define if cxxabi.h is present */
++#define HAVE_LFORTRAN_DEMANGLE
++
++/* Define if XEUS is enabled */
++/* #undef HAVE_LFORTRAN_XEUS */
++
++/* Define if we should use binary modfiles */
++#define WITH_LFORTRAN_BINARY_MODFILES
++
++#endif // LFORTRAN_CONFIG_H
 diff --git a/src/runtime/legacy/CMakeLists.txt b/src/runtime/legacy/CMakeLists.txt
-index 3795d800c..2c58b88ac 100644
+index 3795d800c..f7e66d297 100644
 --- a/src/runtime/legacy/CMakeLists.txt
 +++ b/src/runtime/legacy/CMakeLists.txt
 @@ -1,5 +1,5 @@
@@ -19,14 +50,5 @@ index 3795d800c..2c58b88ac 100644
 -    ../../../src/libasr/runtime/lfortran_intrinsics.c
 +    ${CMAKE_CURRENT_SOURCE_DIR}/../../../src/libasr/runtime/lfortran_intrinsics.c
  )
-
+ 
  if(WIN32)
-@@ -35,7 +35,7 @@ if(WITH_TARGET_WASM)
-         COMMAND $ENV{WASI_SDK_PATH}/bin/clang -I${libasr_SOURCE_DIR}/.. -DCOMPILE_TO_WASM
-             -D_WASI_EMULATED_PROCESS_CLOCKS -c --target=wasm32-wasi ${SRC} -o lfortran_runtime_wasm.o
-         COMMENT "Cross compiling lfortran_intrinscs.c to lfortran_runtime_wasm.o"
--        DEPENDS ${SRC})
-+        DEPENDS ${SRC} lfortran_intrinsics_config)
-     add_custom_target(lfortran_runtime_wasm ALL DEPENDS lfortran_runtime_wasm.o)
-     install(FILES lfortran_runtime_wasm.o
-         DESTINATION ${CMAKE_INSTALL_LIBDIR})
