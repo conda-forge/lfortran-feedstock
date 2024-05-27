@@ -5,7 +5,15 @@ set -ex
 
 CUR_DIR=`pwd`
 cd $HOME
-curl -o wasi-sdk.tar.gz -L https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-21/wasi-sdk-21.0-macos.tar.gz
+
+WASI_SDK_DOWNLOAD_LINK=""
+if [[ $(uname -m) == 'arm64' ]]; then
+    WASI_SDK_DOWNLOAD_LINK="https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-21/wasi-sdk-21.0-macos.tar.gz"
+else
+    WASI_SDK_DOWNLOAD_LINK="https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-21/wasi-sdk-21.0-linux.tar.gz"
+fi
+
+curl -o wasi-sdk.tar.gz -L $WASI_SDK_DOWNLOAD_LINK
 tar -xvf wasi-sdk.tar.gz
 export WASI_SDK_PATH=$HOME/wasi-sdk-21.0
 echo $WASI_SDK_PATH
