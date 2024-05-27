@@ -42,7 +42,7 @@ index 000000000..e45e05ea7
 +
 +#endif // LFORTRAN_CONFIG_H
 diff --git a/src/runtime/legacy/CMakeLists.txt b/src/runtime/legacy/CMakeLists.txt
-index 3795d800c..f7e66d297 100644
+index 3795d800c..bebd8460f 100644
 --- a/src/runtime/legacy/CMakeLists.txt
 +++ b/src/runtime/legacy/CMakeLists.txt
 @@ -1,5 +1,5 @@
@@ -50,5 +50,25 @@ index 3795d800c..f7e66d297 100644
 -    ../../../src/libasr/runtime/lfortran_intrinsics.c
 +    ${CMAKE_CURRENT_SOURCE_DIR}/../../../src/libasr/runtime/lfortran_intrinsics.c
  )
- 
+
  if(WIN32)
+@@ -31,15 +31,15 @@ if(WITH_TARGET_WASM)
+         message(FATAL_ERROR "'WASI_SDK_PATH' must be set when building with 'WITH_TARGET_WASM'")
+     endif()
+
+-    add_custom_command(OUTPUT lfortran_runtime_wasm.o
++    add_custom_command(OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/lfortran_runtime_wasm.o
+         COMMAND $ENV{WASI_SDK_PATH}/bin/clang -I${libasr_SOURCE_DIR}/.. -DCOMPILE_TO_WASM
+-            -D_WASI_EMULATED_PROCESS_CLOCKS -c --target=wasm32-wasi ${SRC} -o lfortran_runtime_wasm.o
++            -D_WASI_EMULATED_PROCESS_CLOCKS -c --target=wasm32-wasi ${SRC} -o ${CMAKE_CURRENT_SOURCE_DIR}/lfortran_runtime_wasm.o
+         COMMENT "Cross compiling lfortran_intrinscs.c to lfortran_runtime_wasm.o"
+         DEPENDS ${SRC})
+-    add_custom_target(lfortran_runtime_wasm ALL DEPENDS lfortran_runtime_wasm.o)
+-    install(FILES lfortran_runtime_wasm.o
++    add_custom_target(lfortran_runtime_wasm ALL DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/lfortran_runtime_wasm.o)
++    install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/lfortran_runtime_wasm.o
+         DESTINATION ${CMAKE_INSTALL_LIBDIR})
+-    install(FILES lfortran_runtime_wasm.o
++    install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/lfortran_runtime_wasm.o
+         DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/..)
+ endif()
