@@ -8,6 +8,8 @@ package:
 source:
   url: https://github.com/lfortran/lfortran/releases/download/v{{ version }}/{{ name }}-{{ version }}.tar.gz
   sha256: 5ecc1ae03067b985943c45f6ec05e9f6e72efd6ad004b052e7a98ba552ff79b0
+  patches:
+    - crtlib_dir.patch
 
 build:
   number: 0

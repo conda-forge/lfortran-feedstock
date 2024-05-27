@@ -1,0 +1,11 @@
+diff --git a/src/runtime/legacy/CMakeLists.txt b/src/runtime/legacy/CMakeLists.txt
+index 3795d800c..ce1ebed86 100644
+--- a/src/runtime/legacy/CMakeLists.txt
++++ b/src/runtime/legacy/CMakeLists.txt
+@@ -1,5 +1,5 @@
+ set(SRC
+-    ../../../src/libasr/runtime/lfortran_intrinsics.c
++    ${CMAKE_CURRENT_SOURCE_DIR}/../../libasr/runtime/lfortran_intrinsics.c
+ )
+
+ if(WIN32)
