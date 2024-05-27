@@ -1,20 +1,17 @@
-diff --git a/src/libasr/runtime/lfortran_intrinsics.c b/src/libasr/runtime/lfortran_intrinsics.c
-index 954900615..cb9110c21 100644
---- a/src/libasr/runtime/lfortran_intrinsics.c
-+++ b/src/libasr/runtime/lfortran_intrinsics.c
-@@ -19,8 +19,8 @@
- #  include <unistd.h>
- #endif
- 
--#include <libasr/runtime/lfortran_intrinsics.h>
--#include <libasr/config.h>
-+#include "./lfortran_intrinsics.h"
-+#include "./../config.h"
- 
- #ifdef HAVE_RUNTIME_STACKTRACE
- 
+diff --git a/src/libasr/CMakeLists.txt b/src/libasr/CMakeLists.txt
+index aaf9db92c..f74a1d630 100644
+--- a/src/libasr/CMakeLists.txt
++++ b/src/libasr/CMakeLists.txt
+@@ -13,6 +13,7 @@ if (NOT LFORTRAN_VERSION)
+ endif ()
+
+ configure_file(config.h.in config.h)
++add_custom_target(lfortran_intrinsics_config ALL DEPENDS config.h)
+
+ set(SRC
+     codegen/asr_to_cpp.cpp
 diff --git a/src/runtime/legacy/CMakeLists.txt b/src/runtime/legacy/CMakeLists.txt
-index 3795d800c..f7e66d297 100644
+index 3795d800c..2c58b88ac 100644
 --- a/src/runtime/legacy/CMakeLists.txt
 +++ b/src/runtime/legacy/CMakeLists.txt
 @@ -1,5 +1,5 @@
@@ -22,5 +19,14 @@ index 3795d800c..f7e66d297 100644
 -    ../../../src/libasr/runtime/lfortran_intrinsics.c
 +    ${CMAKE_CURRENT_SOURCE_DIR}/../../../src/libasr/runtime/lfortran_intrinsics.c
  )
- 
+
  if(WIN32)
+@@ -35,7 +35,7 @@ if(WITH_TARGET_WASM)
+         COMMAND $ENV{WASI_SDK_PATH}/bin/clang -I${libasr_SOURCE_DIR}/.. -DCOMPILE_TO_WASM
+             -D_WASI_EMULATED_PROCESS_CLOCKS -c --target=wasm32-wasi ${SRC} -o lfortran_runtime_wasm.o
+         COMMENT "Cross compiling lfortran_intrinscs.c to lfortran_runtime_wasm.o"
+-        DEPENDS ${SRC})
++        DEPENDS ${SRC} lfortran_intrinsics_config)
+     add_custom_target(lfortran_runtime_wasm ALL DEPENDS lfortran_runtime_wasm.o)
+     install(FILES lfortran_runtime_wasm.o
+         DESTINATION ${CMAKE_INSTALL_LIBDIR})
