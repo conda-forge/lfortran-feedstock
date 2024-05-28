@@ -2,6 +2,32 @@
 
 set -ex
 
+
+CUR_DIR=`pwd`
+cd $HOME
+
+WASI_SDK_DOWNLOAD_LINK=""
+
+if [[ $(uname -s) == "Darwin" ]]; then
+    if [[ $(uname -m) == "arm64" ]]; then
+        WASI_SDK_DOWNLOAD_LINK="https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-21/wasi-sdk-21.0-macos.tar.gz"
+    else
+        WASI_SDK_DOWNLOAD_LINK="https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-21/wasi-sdk-21.0-macos.tar.gz"
+    fi
+else
+    WASI_SDK_DOWNLOAD_LINK="https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-21/wasi-sdk-21.0-linux.tar.gz"
+fi
+
+echo "WASI SDK download link: $WASI_SDK_DOWNLOAD_LINK"
+
+curl -o wasi-sdk.tar.gz -L $WASI_SDK_DOWNLOAD_LINK
+tar -xvf wasi-sdk.tar.gz
+export WASI_SDK_PATH=$HOME/wasi-sdk-21.0
+echo $WASI_SDK_PATH
+$WASI_SDK_PATH/bin/clang --version
+
+cd $CUR_DIR
+
 export CXXFLAGS="${CXXFLAGS} -D__STDC_FORMAT_MACROS -D_LIBCPP_DISABLE_AVAILABILITY"
 
 if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" == 1 ]]; then
@@ -33,6 +59,7 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" == 1 ]]; then
         -DWITH_RUNTIME_LIBRARY=yes \
         -DWITH_RUNTIME_STACKTRACE=yes \
         -DCMAKE_INSTALL_LIBDIR=share/lfortran/lib \
+        -DWITH_TARGET_WASM=yes \
         $SRC_DIR
     make
   )
@@ -53,6 +80,7 @@ cmake ${CMAKE_ARGS} \
     -DWITH_RUNTIME_LIBRARY=$WRT \
     -DWITH_RUNTIME_STACKTRACE=yes \
     -DCMAKE_INSTALL_LIBDIR=share/lfortran/lib \
+    -DWITH_TARGET_WASM=yes \
     $SRC_DIR
 
 make -j${CPU_COUNT}
