@@ -1,4 +1,2 @@
-MACOSX_SDK_VERSION:        # [osx and x86_64]
-  - "10.12"                # [osx and x86_64]
 c_stdlib_version:
 - '2.28'                   # [linux]
