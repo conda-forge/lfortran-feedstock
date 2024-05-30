@@ -3,6 +3,7 @@
 set -ex
 
 export CXXFLAGS="${CXXFLAGS} -D__STDC_FORMAT_MACROS -D_LIBCPP_DISABLE_AVAILABILITY"
+export EMSDK_PATH=${CONDA_EMSDK_DIR}
 
 if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" == 1 ]]; then
   WRT=no
@@ -32,6 +33,7 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" == 1 ]]; then
         -DWITH_XEUS=yes \
         -DWITH_RUNTIME_LIBRARY=yes \
         -DWITH_RUNTIME_STACKTRACE=yes \
+        -DWITH_TARGET_WASM=yes \
         -DCMAKE_INSTALL_LIBDIR=share/lfortran/lib \
         $SRC_DIR
     make
@@ -52,6 +54,7 @@ cmake ${CMAKE_ARGS} \
     -DWITH_XEUS=yes \
     -DWITH_RUNTIME_LIBRARY=$WRT \
     -DWITH_RUNTIME_STACKTRACE=yes \
+    -DWITH_TARGET_WASM=yes \
     -DCMAKE_INSTALL_LIBDIR=share/lfortran/lib \
     $SRC_DIR
 
