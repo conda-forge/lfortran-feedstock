@@ -3,7 +3,16 @@
 set -ex
 
 export CXXFLAGS="${CXXFLAGS} -D__STDC_FORMAT_MACROS -D_LIBCPP_DISABLE_AVAILABILITY"
-export EMSDK_PATH=${CONDA_EMSDK_DIR}
+
+# Install emsdk
+pushd emsdk
+  ./emsdk install latest
+  ./emsdk activate latest
+  source ./emsdk_env.sh
+  printenv | grep "EMSDK"
+  find . -iname "upstream"
+  # TODO: set EMSDK_PATH
+popd
 
 if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" == 1 ]]; then
   WRT=no
