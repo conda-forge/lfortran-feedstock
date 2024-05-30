@@ -1,0 +1,13 @@
+diff --git a/src/libasr/CMakeLists.txt b/src/libasr/CMakeLists.txt
+index aaf9db9..3ee4c74 100644
+--- a/src/libasr/CMakeLists.txt
++++ b/src/libasr/CMakeLists.txt
+@@ -70,6 +70,8 @@ set(SRC
+     pass/insert_deallocate.cpp
+     pass/promote_allocatable_to_nonallocatable.cpp
+ 
++    runtime/lfortran_intrinsics.c
++
+     asr_verify.cpp
+     asr_utils.cpp
+     casting_utils.cpp
