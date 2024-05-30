@@ -17,6 +17,7 @@ requirements:
     - {{ compiler('c') }}
     - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
+    - {{ stdlib("c") }}
     - cmake =3.21.1
     - make   # [unix]
     - xeus =3.0.5       # [build_platform != target_platform]
