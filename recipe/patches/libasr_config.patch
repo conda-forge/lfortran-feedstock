@@ -1,14 +1,26 @@
 diff --git a/src/libasr/CMakeLists.txt b/src/libasr/CMakeLists.txt
-index aaf9db9..e5ce172 100644
+index aaf9db9..a288c06 100644
 --- a/src/libasr/CMakeLists.txt
 +++ b/src/libasr/CMakeLists.txt
-@@ -12,7 +12,8 @@ if (NOT LFORTRAN_VERSION)
+@@ -12,8 +12,21 @@ if (NOT LFORTRAN_VERSION)
          CACHE STRING "LFortran version" FORCE)
  endif ()
  
--configure_file(config.h.in config.h)
 +message(STATUS "OOO CMAKE_CURRENT_DIR ${CMAKE_CURRENT_DIR}")
-+configure_file(config.h.in ${CMAKE_CURRENT_SOURCE_DIR}/libasr/config.h)
+ configure_file(config.h.in config.h)
  
++if(file(EXISTS config.h))
++    # Extract the directory component from the full path
++    get_filename_component(full_path_dir ${CMAKE_CURRENT_BINARY_DIR} PATH)
++
++    # Construct the full path string
++    set(full_path "${full_path_dir}/config.h")
++
++    message(STATUS "MMM config.h exists at: ${full_path}")
++else()
++    message(WARNING "MMM config.h could not be generated.")
++endif()
++
  set(SRC
      codegen/asr_to_cpp.cpp
+     codegen/asr_to_c.cpp
