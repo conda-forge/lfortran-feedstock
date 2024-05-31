@@ -67,6 +67,9 @@ cmake ${CMAKE_ARGS} \
     -DCMAKE_INSTALL_LIBDIR=share/lfortran/lib \
     $SRC_DIR
 
+echo "FIND CONFIG FILE"
+find . -iname "*config.h"
+
 make -j${CPU_COUNT}
 make install
 if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" == 1 ]]; then
