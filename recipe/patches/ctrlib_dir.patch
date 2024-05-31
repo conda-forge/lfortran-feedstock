@@ -22,11 +22,9 @@ index 7eff9c5..ab4dea6 100644
 -        add_custom_target(lfortran_runtime_wasm_emcc ALL DEPENDS lfortran_runtime_wasm_emcc.o)
 -        install(FILES lfortran_runtime_wasm_emcc.o
 +        add_custom_target(lfortran_runtime_wasm_emcc ALL DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/lfortran_runtime_wasm_emcc.o)
-+        COMMENT "CCC Install in CMAKE_INSTALL_LIBDIR ${CMAKE_INSTALL_LIBDIR}"
 +        install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/lfortran_runtime_wasm_emcc.o
              DESTINATION ${CMAKE_INSTALL_LIBDIR})
 -        install(FILES lfortran_runtime_wasm_emcc.o
-+        COMMENT "CCC Install in CMAKE_CURRENT_BINARY_DIR ${CMAKE_CURRENT_BINARY_DIR}"
 +        install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/lfortran_runtime_wasm_emcc.o
              DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/..)
 +        install(FILES ${CMAKE_CURRENT_SOURCE_DIR}/lfortran_runtime_wasm_emcc.o
