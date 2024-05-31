@@ -10,6 +10,7 @@ source:
   sha256: 6b3b7cb1380e96a98a9fd3166a3e7e43c3339f736f76029c246436784ffc868f
   patches:
   - patches/ctrlib_dir.patch
+  - patches/libasr_config.patch
 - git_url: https://github.com/emscripten-core/emsdk.git
   folder: emsdk
 
