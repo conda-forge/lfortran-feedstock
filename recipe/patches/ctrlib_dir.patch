@@ -1,5 +1,5 @@
 diff --git a/src/runtime/legacy/CMakeLists.txt b/src/runtime/legacy/CMakeLists.txt
-index 7eff9c5..ab4dea6 100644
+index 7eff9c5..b6f835b 100644
 --- a/src/runtime/legacy/CMakeLists.txt
 +++ b/src/runtime/legacy/CMakeLists.txt
 @@ -1,5 +1,5 @@
@@ -9,7 +9,7 @@ index 7eff9c5..ab4dea6 100644
  )
  
  if(WIN32)
-@@ -33,16 +33,20 @@ if(WITH_TARGET_WASM)
+@@ -33,16 +33,18 @@ if(WITH_TARGET_WASM)
      endif()
  
      if (DEFINED ENV{EMSDK_PATH})
