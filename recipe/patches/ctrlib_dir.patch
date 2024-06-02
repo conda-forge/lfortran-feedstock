@@ -16,7 +16,7 @@ index 7eff9c5..b6f835b 100644
 -        add_custom_command(OUTPUT lfortran_runtime_wasm_emcc.o
 +        add_custom_command(OUTPUT ${CMAKE_CURRENT_SOURCE_DIR}/lfortran_runtime_wasm_emcc.o
              COMMAND $ENV{EMSDK_PATH}/upstream/emscripten/emcc -I${libasr_SOURCE_DIR}/.. -DCOMPILE_TO_WASM
-                 -c --target=wasm32-unknown-emscripten ${SRC} -o lfortran_runtime_wasm_emcc.o
+                 -c --target=wasm32-unknown-emscripten ${SRC} -o ${CMAKE_CURRENT_SOURCE_DIR}/lfortran_runtime_wasm.o
              COMMENT "Cross compiling lfortran_intrinscs.c to lfortran_runtime_wasm_emcc.o"
              DEPENDS ${SRC})
 -        add_custom_target(lfortran_runtime_wasm_emcc ALL DEPENDS lfortran_runtime_wasm_emcc.o)
