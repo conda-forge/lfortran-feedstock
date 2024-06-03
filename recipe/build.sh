@@ -4,6 +4,16 @@ set -ex
 
 export CXXFLAGS="${CXXFLAGS} -D__STDC_FORMAT_MACROS -D_LIBCPP_DISABLE_AVAILABILITY"
 
+# Install emsdk
+pushd emsdk
+  ./emsdk install 3.1.59
+  ./emsdk activate 3.1.59
+  source ./emsdk_env.sh
+  rm ./node/18.20.3_64bit/bin/node
+  ln -s $(which node) ./node/18.20.3_64bit/bin/node
+  export EMSDK_PATH=${EMSDK}
+popd
+
 if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" == 1 ]]; then
   WRT=no
   (
@@ -32,6 +42,7 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" == 1 ]]; then
         -DWITH_XEUS=yes \
         -DWITH_RUNTIME_LIBRARY=yes \
         -DWITH_RUNTIME_STACKTRACE=yes \
+        -DWITH_TARGET_WASM=yes \
         -DCMAKE_INSTALL_LIBDIR=share/lfortran/lib \
         $SRC_DIR
     make
@@ -52,8 +63,12 @@ cmake ${CMAKE_ARGS} \
     -DWITH_XEUS=yes \
     -DWITH_RUNTIME_LIBRARY=$WRT \
     -DWITH_RUNTIME_STACKTRACE=yes \
+    -DWITH_TARGET_WASM=yes \
     -DCMAKE_INSTALL_LIBDIR=share/lfortran/lib \
     $SRC_DIR
+
+echo "FIND CONFIG FILE"
+find . -iname "*config.h"
 
 make -j${CPU_COUNT}
 make install
