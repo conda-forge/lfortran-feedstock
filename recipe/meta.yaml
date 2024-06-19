@@ -8,9 +8,6 @@ package:
 source:
   - url: https://github.com/lfortran/lfortran/releases/download/v{{ version }}/{{ name }}-{{ version }}.tar.gz
     sha256: 2ffed05a6da827a1e81312ce385927bc5da3d828f774986466d6609332a0228f
-    patches:
-      - patches/ctrlib_dir.patch
-      - patches/libasr_config.patch
   - git_url: https://github.com/emscripten-core/emsdk.git
     folder: emsdk
 
