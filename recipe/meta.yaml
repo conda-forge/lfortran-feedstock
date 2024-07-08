@@ -1,5 +1,5 @@
 {% set name = "lfortran" %}
-{% set version = "0.37.0" %}
+{% set version = "0.38.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   - url: https://github.com/lfortran/lfortran/releases/download/v{{ version }}/{{ name }}-{{ version }}.tar.gz
-    sha256: 1e31898a8c8e8116ce8968f836e68ead06c5a5b4998b4d6cf6ae26be8301db7d
+    sha256: 7d9cf30fc87fe430f0d5e70759d0fa321643e44dff90915a56f8987d0bcbee57
   - git_url: https://github.com/emscripten-core/emsdk.git
     folder: emsdk
 
