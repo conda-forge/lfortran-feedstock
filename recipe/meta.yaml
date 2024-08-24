@@ -22,6 +22,7 @@ requirements:
     - {{ stdlib("c") }}
     - cmake =3.21.1
     - make   # [unix]
+    - libcxx =17.0.6  # [osx and x86_64]
     - xeus =5.1.0       # [build_platform != target_platform]
     - xeus-zmq =3.0.0   # [build_platform != target_platform]
     - llvmdev =17.0.6   # [build_platform != target_platform]
@@ -34,6 +35,7 @@ requirements:
     - xeus-zmq =3.0.0
     - llvmdev =16.0.6  # [not osx]
     - llvmdev =17.0.6  # [osx]
+    - libcxx =17.0.6  # [osx and x86_64]
     - nlohmann_json =3.11.3
     - zlib
     - zstd-static =1.5.5
