@@ -20,6 +20,7 @@ requirements:
     - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
     - {{ stdlib("c") }}
+    - clang =16.*  # [osx-arm64]
     - cmake =3.21.1
     - make   # [unix]
     - xeus =5.1.0       # [build_platform != target_platform]
