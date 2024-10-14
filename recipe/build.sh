@@ -23,6 +23,7 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" == 1 ]]; then
     export AR=$($CC_FOR_BUILD -print-prog-name=ar)
     export OBJCOPY=$($CC_FOR_BUILD -print-prog-name=objcopy)
     export STRIP=$($CC_FOR_BUILD -print-prog-name=strip)
+    export LFORTRAN_CC=${CC}
 
     # CFLAGS and CXXFLAGS are intentionally empty
     unset CFLAGS
