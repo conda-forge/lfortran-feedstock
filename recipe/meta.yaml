@@ -12,6 +12,7 @@ source:
     - macos_time.patch
     - lsp.patch
     - llvm_sym.patch
+    - llvm_stacktrace.patch
   - git_url: https://github.com/emscripten-core/emsdk.git
     folder: emsdk
 
