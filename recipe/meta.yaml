@@ -28,10 +28,10 @@ requirements:
     - make   # [unix]
     - xeus =5.1.0       # [build_platform != target_platform]
     - xeus-zmq =3.0.0   # [build_platform != target_platform]
-    - llvmdev =19.1.1   # [build_platform != target_platform]
+    - llvmdev =17.0.6   # [build_platform != target_platform]
     - nlohmann_json =3.11.3     # [build_platform != target_platform]
     - zlib              # [build_platform != target_platform]
-    - zstd-static =1.5.6  # [build_platform != target_platform]
+    - zstd-static =1.5.5  # [build_platform != target_platform]
     - nodejs
   host:
     - xeus =5.1.0
