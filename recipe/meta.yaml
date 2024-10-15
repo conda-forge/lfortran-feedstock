@@ -31,7 +31,7 @@ requirements:
     - llvmdev =19.1.1   # [build_platform != target_platform]
     - nlohmann_json =3.11.3     # [build_platform != target_platform]
     - zlib              # [build_platform != target_platform]
-    - zstd-static =1.5.5  # [build_platform != target_platform]
+    - zstd-static =1.5.6  # [build_platform != target_platform]
     - nodejs
   host:
     - xeus =5.1.0
@@ -39,7 +39,7 @@ requirements:
     - llvmdev =19.1.1
     - nlohmann_json =3.11.3
     - zlib
-    - zstd-static =1.5.5
+    - zstd-static =1.5.6
   run:
     # xeus breaks abi compatibility in patch versions even though
     # run_exports say otherwise in https://github.com/conda-forge/xeus-feedstock/blob/0896038be810da2944ebcb612e22886815ea691e/recipe/meta.yaml#L18
