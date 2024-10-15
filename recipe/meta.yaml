@@ -16,7 +16,7 @@ source:
     folder: emsdk
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -36,11 +36,10 @@ requirements:
   host:
     - xeus =5.1.0
     - xeus-zmq =3.0.0
-    - llvmdev =17.0.6  # [not win]
-    - llvmdev =16.0.6  # [win]
+    - llvmdev =19.1.1
     - nlohmann_json =3.11.3
     - zlib
-    - zstd-static =1.5.5
+    - zstd-static =1.5.6
   run:
     # xeus breaks abi compatibility in patch versions even though
     # run_exports say otherwise in https://github.com/conda-forge/xeus-feedstock/blob/0896038be810da2944ebcb612e22886815ea691e/recipe/meta.yaml#L18
