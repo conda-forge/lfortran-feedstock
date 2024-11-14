@@ -32,7 +32,7 @@ requirements:
     - nlohmann_json =3.11.3     # [build_platform != target_platform]
     - zlib              # [build_platform != target_platform]
     - zstd-static =1.5.5  # [build_platform != target_platform]
-    - nodejs =18.20.3
+    - nodejs
   host:
     - xeus =5.1.0
     - xeus-zmq =3.0.0
