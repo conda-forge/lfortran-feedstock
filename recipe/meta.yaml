@@ -9,7 +9,6 @@ source:
   - url: https://github.com/lfortran/lfortran/releases/download/v{{ version }}/{{ name }}-{{ version }}.tar.gz
     sha256: 3144abce88da2bcfd39e2c5c655b1bc977c429f3e7dae58afbe45c0237f07298
     patches:
-    - macos_time.patch
     - llvm_sym.patch
   - git_url: https://github.com/emscripten-core/emsdk.git
     folder: emsdk
