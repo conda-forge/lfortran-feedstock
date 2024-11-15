@@ -9,8 +9,9 @@ pushd emsdk
   ./emsdk install 3.1.59
   ./emsdk activate 3.1.59
   source ./emsdk_env.sh
-  #rm ./node/18.20.3_64bit/bin/node
-  #ln -s $(which node) ./node/18.20.3_64bit/bin/node
+  # The Node version below must be adjusted according to emsdk version
+  rm ./node/16.20.0_64bit/bin/node
+  ln -s $(which node) ./node/16.20.0_64bit/bin/node
   export EMSDK_PATH=${EMSDK}
 popd
 
