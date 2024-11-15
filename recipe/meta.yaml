@@ -24,7 +24,7 @@ requirements:
     - {{ stdlib("c") }}
     - {{ compiler('cxx') }}
     - {{ stdlib("c") }}
-    - cmake =3.31.0
+    - cmake =3.29.6
     - make =4.4.1  # [unix]
     - xeus =5.1.0       # [build_platform != target_platform]
     - xeus-zmq =3.0.0   # [build_platform != target_platform]
