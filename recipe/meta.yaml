@@ -31,7 +31,7 @@ requirements:
     - llvmdev =18.1.8   # [build_platform != target_platform]
     - nlohmann_json =3.11.3     # [build_platform != target_platform]
     - zlib              # [build_platform != target_platform]
-    - zstd-static =1.5.5  # [build_platform != target_platform]
+    - zstd-static =1.5.6  # [build_platform != target_platform]
     - nodejs
   host:
     - xeus =5.1.0
