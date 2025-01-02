@@ -7,7 +7,7 @@ package:
 
 source:
   - url: https://github.com/lfortran/lfortran/releases/download/v{{ version }}/{{ name }}-{{ version }}.tar.gz
-    sha256: 3144abce88da2bcfd39e2c5c655b1bc977c429f3e7dae58afbe45c0237f07298
+    sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
   - git_url: https://github.com/emscripten-core/emsdk.git
     # This must be in sync with build.sh:
     git_rev: 3.1.59
