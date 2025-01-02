@@ -1,5 +1,5 @@
 {% set name = "lfortran" %}
-{% set version = "0.42.0" %}
+{% set version = "0.43.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,9 +7,7 @@ package:
 
 source:
   - url: https://github.com/lfortran/lfortran/releases/download/v{{ version }}/{{ name }}-{{ version }}.tar.gz
-    sha256: 3144abce88da2bcfd39e2c5c655b1bc977c429f3e7dae58afbe45c0237f07298
-    patches:
-    - llvm_sym.patch
+    sha256: c834622466eee4ffc13731cda89bd4578731625de96f8e1e09531c950e318580
   - git_url: https://github.com/emscripten-core/emsdk.git
     # This must be in sync with build.sh:
     git_rev: 3.1.59
@@ -37,6 +35,7 @@ requirements:
     - xeus =5.1.0
     - xeus-zmq =3.0.0
     - llvmdev =19.1.1
+    - libunwind =1.7.2  # [linux]
     - nlohmann_json =3.11.3
     - zlib
     - zstd-static =1.5.6
