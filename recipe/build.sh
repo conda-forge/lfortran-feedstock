@@ -42,6 +42,7 @@ if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" == 1 ]]; then
         -DCMAKE_PREFIX_PATH=$BUILD_PREFIX \
         -DWITH_LLVM=yes \
         -DWITH_LLVM_STACKTRACE=no \
+        -DWITH_LSP=yes \
         -DWITH_XEUS=yes \
         -DWITH_RUNTIME_LIBRARY=yes \
         -DWITH_RUNTIME_STACKTRACE=yes \
@@ -64,6 +65,7 @@ cmake ${CMAKE_ARGS} \
     -DCMAKE_PREFIX_PATH=$PREFIX \
     -DWITH_LLVM=yes \
     -DWITH_LLVM_STACKTRACE=no \
+    -DWITH_LSP=yes \
     -DWITH_XEUS=yes \
     -DWITH_RUNTIME_LIBRARY=$WRT \
     -DWITH_RUNTIME_STACKTRACE=yes \
