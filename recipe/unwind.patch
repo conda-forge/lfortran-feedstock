@@ -1,0 +1,13 @@
+--- a/src/libasr/runtime/lfortran_intrinsics.c
++++ b/src/libasr/runtime/lfortran_intrinsics.c
+@@ -5318,6 +5318,10 @@ static _Unwind_Reason_Code unwind_callback(struct _Unwind_Context *context,
+ }
+ #endif // HAVE_LFORTRAN_UNWIND
+
++#ifdef HAVE_LFORTRAN_UNWIND
++extern _Unwind_Reason_Code _Unwind_Backtrace(_Unwind_Trace_Fn callback, void *data);
++#endif
++
+ struct Stacktrace get_stacktrace_addresses() {
+     struct Stacktrace d;
+     d.pc_size = 0;
