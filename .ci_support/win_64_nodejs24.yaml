@@ -9,7 +9,7 @@ channel_targets:
 cxx_compiler:
 - vs2022
 nodejs:
-- '20'
+- '24'
 target_platform:
 - win-64
 zlib:

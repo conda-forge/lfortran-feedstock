@@ -21,7 +21,7 @@ cxx_compiler_version:
 macos_machine:
 - arm64-apple-darwin20.0.0
 nodejs:
-- '20'
+- '24'
 target_platform:
 - osx-arm64
 zip_keys:
