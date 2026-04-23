@@ -12,18 +12,22 @@ jobs:
         CONFIG: osx_64_nodejs22
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
+        store_build_artifacts: false
       osx_64_nodejs24:
         CONFIG: osx_64_nodejs24
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
+        store_build_artifacts: false
       osx_arm64_nodejs22:
         CONFIG: osx_arm64_nodejs22
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
+        store_build_artifacts: false
       osx_arm64_nodejs24:
         CONFIG: osx_arm64_nodejs24
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
+        store_build_artifacts: false
   timeoutInMinutes: 360
   variables: {}
 
