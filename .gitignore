@@ -13,7 +13,6 @@
 !/**/
 # Don't ignore any files/folders recursively in the following folders
 !/recipe/**
-recipe/recipe-scripts-license.txt
 !/.ci_support/**
 
 # Since we ignore files/folders recursively, any folders inside
