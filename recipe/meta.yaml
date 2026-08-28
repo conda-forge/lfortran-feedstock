@@ -1,5 +1,6 @@
 {% set name = "lfortran" %}
 {% set version = "0.65.0" %}
+{% set llvm_version = "21.1.7" %}
 
 package:
   name: {{ name|lower }}
@@ -19,7 +20,7 @@ source:
     folder: emsdk
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -30,7 +31,7 @@ requirements:
     - make =4.4.1  # [unix]
     - xeus =6.0.1       # [build_platform != target_platform]
     - xeus-zmq =4.0.0   # [build_platform != target_platform]
-    - llvmdev =21.1.7   # [build_platform != target_platform]
+    - llvmdev ={{ llvm_version }}   # [build_platform != target_platform]
     - nlohmann_json =3.12.0     # [build_platform != target_platform]
     - zlib              # [build_platform != target_platform]
     - zstd-static =1.5.7  # [build_platform != target_platform]
@@ -39,28 +40,39 @@ requirements:
   host:
     - xeus =6.0.1
     - xeus-zmq =4.0.0
-    - llvmdev =21.1.7
+    - llvmdev ={{ llvm_version }}
     - libunwind =1.7.2  # [linux]
     - nlohmann_json =3.12.0
     - zlib
     - zstd-static =1.5.7
   run:
-    # lfortran invokes `clang` at run time to link object files
-    - clang =21.1.7
+    # lfortran invokes `clang` at run time only as a linker driver to link
+    # user objects against the prebuilt runtime (src/bin/lfortran.cpp). There
+    # is no ABI coupling to the LLVM lfortran itself was built against, so a
+    # lower bound suffices; an exact pin made lfortran unsolvable next to
+    # newer LLVM toolchains (see PR #141). Users can override
+    # the driver via `--linker` or `LFORTRAN_LINKER` (e.g. gcc).
+    # Not needed on Windows: the default target there is
+    # x86_64-pc-windows-msvc and linking is driven by MSVC's link.exe.
+    - clang >=21  # [not win]
     # xeus breaks abi compatibility in patch versions even though
     # run_exports say otherwise in https://github.com/conda-forge/xeus-feedstock/blob/0896038be810da2944ebcb612e22886815ea691e/recipe/meta.yaml#L18
     - {{ pin_compatible("xeus", max_pin="x.x.x") }}  # [win]
-    - zstd =1.5.7  # [win]
+    # Windows links zstd dynamically (unlike unix, where it is static), so a
+    # run dep is required; the 1.5.x ABI is stable, hence a range, not =.
+    - zstd >=1.5.6,<1.6  # [win]
 
 test:
   requires:
     - jupyter
+    - vs2022_win-64  # [win]
   commands:
     - test -f ${PREFIX}/bin/lfortran  # [unix]
     - if not exist %LIBRARY_PREFIX%\bin\lfortran.exe exit 1  # [win]
     - lfortran --help
     - lfortran --version
     - echo "print *, 'Hello'; end" > hello.f90 && lfortran hello.f90 && ./hello.out   # [unix]
+    - echo print *, 'Hello'; end > hello.f90 && lfortran hello.f90 -o hello.exe && hello.exe  # [win]
     - jupyter kernelspec list --json
       # This fails if the `fortran` spec is not installed
     - jupyter kernelspec remove -f fortran
