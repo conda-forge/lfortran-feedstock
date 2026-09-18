@@ -1,0 +1,102 @@
+schema_version: 1
+
+context:
+  name: lfortran
+  version: "0.66.0"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  - url: https://github.com/lfortran/lfortran/releases/download/v${{ version }}/${{ name }}-${{ version }}.tar.gz
+    sha256: 961d84f49d07951a279b7835e0f9864489a167a80a8c3c502a797fb6c61669c7
+    patches:
+      # Fixes the WASM runtime cross-compile: lfortran_intrinsics.c includes
+      # the CMake-generated <libasr/config.h>, but the emcc command line was
+      # missing the build-tree include dir. To be upstreamed into LFortran.
+      - patches/0001-cmake-add-generated-header-dir-to-wasm-runtime-includes.patch
+    # This must be in sync with build.sh:
+    git: https://github.com/emscripten-core/emsdk.git
+    rev: "3.1.59"
+    target_directory: emsdk
+
+build:
+  number: 1
+
+requirements:
+  build:
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - ${{ stdlib("c") }}
+    - cmake =3.29.6
+    - if: unix
+      then: make =4.4.1
+    - if: build_platform != target_platform
+      then: xeus =6.0.1
+    - if: build_platform != target_platform
+      then: xeus-zmq =4.0.0
+    - if: build_platform != target_platform
+      then: llvmdev =21.1.7
+    - if: build_platform != target_platform
+      then: nlohmann_json =3.12.0
+    - if: build_platform != target_platform
+      then: zlib
+    - if: build_platform != target_platform
+      then: zstd-static =1.5.7
+    - if: linux and build_platform != target_platform
+      then: libunwind =1.7.2
+    - nodejs
+  host:
+    - xeus =6.0.1
+    - xeus-zmq =4.0.0
+    - llvmdev =21.1.7
+    - if: linux
+      then: libunwind =1.7.2
+    - nlohmann_json =3.12.0
+    - zlib
+    - zstd-static =1.5.7
+  run:
+    # lfortran invokes `clang` at run time to link object files
+    - clang =21.1.7
+    # xeus breaks abi compatibility in patch versions even though
+    # run_exports say otherwise in https://github.com/conda-forge/xeus-feedstock/blob/0896038be810da2944ebcb612e22886815ea691e/recipe/meta.yaml#L18
+    - if: win
+      then: ${{ pin_compatible("xeus", upper_bound="x.x.x") }}
+    - if: win
+      then: zstd =1.5.7
+
+tests:
+  - requirements:
+      run:
+        - jupyter
+    script:
+      - if: unix
+        then: test -f ${PREFIX}/bin/lfortran
+      - if: win
+        then: if not exist %LIBRARY_PREFIX%\bin\lfortran.exe exit 1
+      - lfortran --help
+      - lfortran --version
+      - if: unix
+        then: echo "print *, 'Hello'; end" > hello.f90 && lfortran hello.f90 && ./hello.out
+      - jupyter kernelspec list --json
+      - jupyter kernelspec remove -f fortran
+
+about:
+  license: BSD-3-Clause
+  license_file: LICENSE
+  summary: Modern interactive LLVM-based Fortran compiler
+  description: |
+    LFortran is a modern open-source (BSD licensed) interactive Fortran
+    compiler built on top of LLVM. It can execute user's code interactively to
+    allow exploratory work (much like Python, MATLAB or Julia) as well as
+    compile to binaries with the goal to run user’s code on modern
+    architectures such as multi-core CPUs and GPUs.
+  homepage: https://lfortran.org
+  repository: https://github.com/lfortran/lfortran
+  documentation: https://docs.lfortran.org/
+
+extra:
+  recipe-maintainers:
+    - certik
+    - Shaikh-Ubaid
