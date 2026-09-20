@@ -3,7 +3,7 @@ About lfortran-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/lfortran-feedstock/blob/main/LICENSE.txt)
 
-Home: https://lfortran.org
+Home: https://lfortran.org/
 
 Package license: BSD-3-Clause
 
@@ -18,7 +18,6 @@ compiler built on top of LLVM. It can execute user's code interactively to
 allow exploratory work (much like Python, MATLAB or Julia) as well as
 compile to binaries with the goal to run user’s code on modern
 architectures such as multi-core CPUs and GPUs.
-
 
 Current build status
 ====================
@@ -226,7 +225,4 @@ Feedstock Maintainers
 
 * [@Shaikh-Ubaid](https://github.com/Shaikh-Ubaid/)
 * [@certik](https://github.com/certik/)
-
-
-<!-- dummy commit to enable rerendering -->
 

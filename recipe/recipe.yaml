@@ -16,8 +16,7 @@ source:
       # the CMake-generated <libasr/config.h>, but the emcc command line was
       # missing the build-tree include dir. To be upstreamed into LFortran.
       - patches/0001-cmake-add-generated-header-dir-to-wasm-runtime-includes.patch
-    # This must be in sync with build.sh:
-    git: https://github.com/emscripten-core/emsdk.git
+  - git: https://github.com/emscripten-core/emsdk.git
     rev: "3.1.59"
     target_directory: emsdk
 
