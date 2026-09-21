@@ -15,6 +15,8 @@ pushd emsdk
   export EMSDK_PATH=${EMSDK}
 popd
 
+export EMSDK_PYTHON=$BUILD_PREFIX/bin/python
+
 if [[ "${CONDA_BUILD_CROSS_COMPILATION:-0}" == 1 ]]; then
   WRT=no
   (

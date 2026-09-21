@@ -46,6 +46,7 @@ requirements:
     - if: linux and build_platform != target_platform
       then: libunwind =1.7.2
     - nodejs
+    - python
   host:
     - xeus =6.0.1
     - xeus-zmq =4.0.0
