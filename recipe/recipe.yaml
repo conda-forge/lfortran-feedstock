@@ -46,7 +46,8 @@ requirements:
     - if: linux and build_platform != target_platform
       then: libunwind =1.7.2
     - nodejs
-    - python
+    # Adding >=3.10 on Python to prevent generating a build matrix for all Python versions 
+    - python >=3.10
   host:
     - xeus =6.0.1
     - xeus-zmq =4.0.0
@@ -59,10 +60,6 @@ requirements:
   run:
     # lfortran invokes `clang` at run time to link object files
     - clang =21.1.7
-    # xeus breaks abi compatibility in patch versions even though
-    # run_exports say otherwise in https://github.com/conda-forge/xeus-feedstock/blob/0896038be810da2944ebcb612e22886815ea691e/recipe/meta.yaml#L18
-    - if: win
-      then: ${{ pin_compatible("xeus", upper_bound="x.x.x") }}
     - if: win
       then: zstd =1.5.7
 
