@@ -17,7 +17,7 @@ source:
       # missing the build-tree include dir. To be upstreamed into LFortran.
       - patches/0001-cmake-add-generated-header-dir-to-wasm-runtime-includes.patch
   - git: https://github.com/emscripten-core/emsdk.git
-    rev: "3.1.59"
+    rev: "6.0.9"
     target_directory: emsdk
 
 build:
