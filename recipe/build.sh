@@ -6,12 +6,12 @@ export CXXFLAGS="${CXXFLAGS} -D__STDC_FORMAT_MACROS -D_LIBCPP_DISABLE_AVAILABILI
 
 # Install emsdk
 pushd emsdk
-  ./emsdk install 3.1.59
-  ./emsdk activate 3.1.59
+  ./emsdk install 6.0.9
+  ./emsdk activate 6.0.9
   source ./emsdk_env.sh
-  # The Node version below must be adjusted according to emsdk version
-  rm ./node/16.20.0_64bit/bin/node
-  ln -s $(which node) ./node/16.20.0_64bit/bin/node
+  # # The Node version below must be adjusted according to emsdk version
+  # rm ./node/16.20.0_64bit/bin/node
+  # ln -s $(which node) ./node/16.20.0_64bit/bin/node
   export EMSDK_PATH=${EMSDK}
 popd
 
