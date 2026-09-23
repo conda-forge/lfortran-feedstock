@@ -3,6 +3,10 @@ About lfortran-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/lfortran-feedstock/blob/main/LICENSE.txt)
 
+
+About lfortran
+--------------
+
 Home: https://lfortran.org/
 
 Package license: BSD-3-Clause
@@ -18,6 +22,22 @@ compiler built on top of LLVM. It can execute user's code interactively to
 allow exploratory work (much like Python, MATLAB or Julia) as well as
 compile to binaries with the goal to run user’s code on modern
 architectures such as multi-core CPUs and GPUs.
+
+About xeus-lfortran
+-------------------
+
+Home: https://lfortran.org/
+
+Package license: BSD-3-Clause
+
+Summary: Jupyter kernel for LFortran
+
+Development: https://github.com/lfortran/lfortran
+
+Documentation: https://docs.lfortran.org/
+
+This metapackage installs LFortran, which provides the native Fortran
+kernel for Jupyter.
 
 Current build status
 ====================
@@ -64,6 +84,7 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-lfortran-green.svg)](https://anaconda.org/conda-forge/lfortran) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/lfortran.svg)](https://anaconda.org/conda-forge/lfortran) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/lfortran.svg)](https://anaconda.org/conda-forge/lfortran) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/lfortran.svg)](https://anaconda.org/conda-forge/lfortran) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-xeus--lfortran-green.svg)](https://anaconda.org/conda-forge/xeus-lfortran) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/xeus-lfortran.svg)](https://anaconda.org/conda-forge/xeus-lfortran) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/xeus-lfortran.svg)](https://anaconda.org/conda-forge/xeus-lfortran) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/xeus-lfortran.svg)](https://anaconda.org/conda-forge/xeus-lfortran) |
 
 Installing lfortran
 ===================
@@ -82,7 +103,7 @@ How to use
 <summary>With conda</summary>
 
 ```
-conda install lfortran
+conda install lfortran xeus-lfortran
 ```
 
 </details>
@@ -91,7 +112,7 @@ conda install lfortran
 <summary>With mamba</summary>
 
 ```
-mamba install lfortran
+mamba install lfortran xeus-lfortran
 ```
 
 </details>
@@ -101,9 +122,9 @@ mamba install lfortran
 
 ```
 # for adding to your local project
-pixi add lfortran
+pixi add lfortran xeus-lfortran
 # for installing globally
-pixi global install lfortran
+pixi global install lfortran xeus-lfortran
 ```
 
 </details>
