@@ -3,6 +3,7 @@ schema_version: 1
 context:
   name: lfortran
   version: "0.66.0"
+  llvm_version: "21.1.7"
 
 package:
   name: ${{ name|lower }}
@@ -21,7 +22,7 @@ source:
     target_directory: emsdk
 
 build:
-  number: 1
+  number: 2
 
 requirements:
   build:
@@ -36,7 +37,7 @@ requirements:
     - if: build_platform != target_platform
       then: xeus-zmq =4.0.0
     - if: build_platform != target_platform
-      then: llvmdev =21.1.7
+      then: llvmdev =${{ llvm_version }}
     - if: build_platform != target_platform
       then: nlohmann_json =3.12.0
     - if: build_platform != target_platform
@@ -51,22 +52,33 @@ requirements:
   host:
     - xeus =6.0.1
     - xeus-zmq =4.0.0
-    - llvmdev =21.1.7
+    - llvmdev =${{ llvm_version }}
     - if: linux
       then: libunwind =1.7.2
     - nlohmann_json =3.12.0
     - zlib
     - zstd-static =1.5.7
   run:
-    # lfortran invokes `clang` at run time to link object files
-    - clang =21.1.7
+    # lfortran invokes `clang` at run time only as a linker driver to link
+    # user objects against the prebuilt runtime (src/bin/lfortran.cpp). No
+    # ABI coupling to the LLVM lfortran was built against, so a lower bound
+    # suffices; an exact pin made lfortran unsolvable next to newer LLVM
+    # toolchains (see PR #141). Override via `--linker`/`LFORTRAN_LINKER`.
+    # Not needed on Windows: default target is x86_64-pc-windows-msvc,
+    # linking is driven by MSVC's link.exe.
+    - if: not win
+      then: clang >=21
+    # Windows links zstd dynamically (unix links it statically), so a run
+    # dep is required there; the 1.5.x ABI is stable, hence a range, not =.
     - if: win
-      then: zstd =1.5.7
+      then: zstd >=1.5.6,<1.6
 
 tests:
   - requirements:
       run:
         - jupyter
+        - if: win
+          then: vs2022_win-64
     script:
       - if: unix
         then: test -f ${PREFIX}/bin/lfortran
@@ -76,6 +88,8 @@ tests:
       - lfortran --version
       - if: unix
         then: echo "print *, 'Hello'; end" > hello.f90 && lfortran hello.f90 && ./hello.out
+      - if: win
+        then: echo print *, 'Hello'; end > hello.f90 && lfortran hello.f90 -o hello.exe && hello.exe
       - jupyter kernelspec list --json
       - jupyter kernelspec remove -f fortran
 
