@@ -3,7 +3,7 @@ MACOSX_SDK_VERSION:        # [osx and x86_64]
 
 # nodejs is only a build-time tool (emsdk/WASM) and does not affect the
 # resulting package, so we build against a single version instead of every
-# nodejs in the global pinning. This also avoids the nodejs 26 (icu 78) vs
-# llvmdev 19 (libxml2 <2.14, icu 75) conflict in the osx-arm64 cross-compile.
+# nodejs in the global pinning. This also avoids icu/libxml2 conflicts
+# between nodejs and llvmdev 21 in the osx-arm64 cross-compile.
 nodejs:
   - "24"
