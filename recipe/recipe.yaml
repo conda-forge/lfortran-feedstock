@@ -5,8 +5,8 @@ context:
   version: "0.66.0"
   llvm_version: "21.1.7"
 
-package:
-  name: ${{ name|lower }}
+recipe:
+  name: ${{ name|lower }}-split
   version: ${{ version }}
 
 source:
@@ -22,76 +22,114 @@ source:
     target_directory: emsdk
 
 build:
-  number: 2
+  number: 3
 
-requirements:
-  build:
-    - ${{ compiler('c') }}
-    - ${{ compiler('cxx') }}
-    - ${{ stdlib("c") }}
-    - cmake =3.29.6
-    - if: unix
-      then: make =4.4.1
-    - if: build_platform != target_platform
-      then: xeus =6.0.1
-    - if: build_platform != target_platform
-      then: xeus-zmq =4.0.0
-    - if: build_platform != target_platform
-      then: llvmdev =${{ llvm_version }}
-    - if: build_platform != target_platform
-      then: nlohmann_json =3.12.0
-    - if: build_platform != target_platform
-      then: zlib
-    - if: build_platform != target_platform
-      then: zstd-static =1.5.7
-    - if: linux and build_platform != target_platform
-      then: libunwind =1.7.2
-    - nodejs
-    # Adding >=3.10 on Python to prevent generating a build matrix for all Python versions 
-    - python >=3.10
-  host:
-    - xeus =6.0.1
-    - xeus-zmq =4.0.0
-    - llvmdev =${{ llvm_version }}
-    - if: linux
-      then: libunwind =1.7.2
-    - nlohmann_json =3.12.0
-    - zlib
-    - zstd-static =1.5.7
-  run:
-    # lfortran invokes `clang` at run time only as a linker driver to link
-    # user objects against the prebuilt runtime (src/bin/lfortran.cpp). No
-    # ABI coupling to the LLVM lfortran was built against, so a lower bound
-    # suffices; an exact pin made lfortran unsolvable next to newer LLVM
-    # toolchains (see PR #141). Override via `--linker`/`LFORTRAN_LINKER`.
-    # Not needed on Windows: default target is x86_64-pc-windows-msvc,
-    # linking is driven by MSVC's link.exe.
-    - if: not win
-      then: clang >=21
-    # Windows links zstd dynamically (unix links it statically), so a run
-    # dep is required there; the 1.5.x ABI is stable, hence a range, not =.
-    - if: win
-      then: zstd >=1.5.6,<1.6
-
-tests:
-  - requirements:
-      run:
-        - jupyter
+outputs:
+  - package:
+      name: lfortran
+    build:
+      script:
+        - if: unix
+          then: build.sh
         - if: win
-          then: vs2022_win-64
-    script:
-      - if: unix
-        then: test -f ${PREFIX}/bin/lfortran
-      - if: win
-        then: if not exist %LIBRARY_PREFIX%\bin\lfortran.exe exit 1
-      - lfortran --help
-      - lfortran --version
-      - if: unix
-        then: echo "print *, 'Hello'; end" > hello.f90 && lfortran hello.f90 && ./hello.out
-      - if: win
-        then: echo print *, 'Hello'; end > hello.f90 && lfortran hello.f90 -o hello.exe && hello.exe
-      - jupyter kernelspec list --json
-      - jupyter kernelspec remove -f fortran
+          then: build.bat
+    requirements:
+      build:
+        - ${{ compiler('c') }}
+        - ${{ compiler('cxx') }}
+        - ${{ stdlib("c") }}
+        - cmake =3.29.6
+        - if: unix
+          then: make =4.4.1
+        - if: build_platform != target_platform
+          then: xeus =6.0.1
+        - if: build_platform != target_platform
+          then: xeus-zmq =4.0.0
+        - if: build_platform != target_platform
+          then: llvmdev =${{ llvm_version }}
+        - if: build_platform != target_platform
+          then: nlohmann_json =3.12.0
+        - if: build_platform != target_platform
+          then: zlib
+        - if: build_platform != target_platform
+          then: zstd-static =1.5.7
+        - if: linux and build_platform != target_platform
+          then: libunwind =1.7.2
+        - nodejs
+        # Adding >=3.10 on Python to prevent generating a build matrix for all Python versions
+        - python >=3.10
+      host:
+        - xeus =6.0.1
+        - xeus-zmq =4.0.0
+        - llvmdev =${{ llvm_version }}
+        - if: linux
+          then: libunwind =1.7.2
+        - nlohmann_json =3.12.0
+        - zlib
+        - zstd-static =1.5.7
+      run:
+        # lfortran invokes `clang` at run time only as a linker driver to link
+        # user objects against the prebuilt runtime (src/bin/lfortran.cpp). No
+        # ABI coupling to the LLVM lfortran was built against, so a lower bound
+        # suffices; an exact pin made lfortran unsolvable next to newer LLVM
+        # toolchains (see PR #141). Override via `--linker`/`LFORTRAN_LINKER`.
+        # Not needed on Windows: default target is x86_64-pc-windows-msvc,
+        # linking is driven by MSVC's link.exe.
+        - if: not win
+          then: clang >=21
+        # Windows links zstd dynamically (unix links it statically), so a run
+        # dep is required there; the 1.5.x ABI is stable, hence a range, not =.
+        - if: win
+          then: zstd >=1.5.6,<1.6
+    tests:
+      - package_contents:
+          bin:
+            - lfortran
+          files:
+            - share/jupyter/kernels/fortran/kernel.json
+      - requirements:
+          run:
+            - jupyter
+            - if: win
+              then: vs2022_win-64
+        script:
+          - if: unix
+            then: test -f ${PREFIX}/bin/lfortran
+          - if: win
+            then: if not exist %LIBRARY_PREFIX%\bin\lfortran.exe exit 1
+          - lfortran --help
+          - lfortran --version
+          - if: unix
+            then: echo "print *, 'Hello'; end" > hello.f90 && lfortran hello.f90 && ./hello.out
+          - if: win
+            then: echo print *, 'Hello'; end > hello.f90 && lfortran hello.f90 -o hello.exe && hello.exe
+          - jupyter kernelspec list --json
+          - jupyter kernelspec remove -f fortran
+
+  - package:
+      name: xeus-lfortran
+    build:
+      script:
+        - echo "xeus-lfortran is provided by lfortran"
+    requirements:
+      run:
+        - ${{ pin_subpackage('lfortran', exact=True) }}
+    about:
+      summary: Jupyter kernel for LFortran
+      description: |
+        This metapackage installs LFortran, which provides the native Fortran
+        kernel for Jupyter.
+    tests:
+      - requirements:
+          run:
+            - jupyter
+        script:
+          - lfortran --version
+          - if: unix
+            then: test -f ${PREFIX}/share/jupyter/kernels/fortran/kernel.json
+          - if: win
+            then: if not exist %PREFIX%\share\jupyter\kernels\fortran\kernel.json exit 1
+          - jupyter kernelspec list --json
 
 about:
   license: BSD-3-Clause
