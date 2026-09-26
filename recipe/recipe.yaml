@@ -17,12 +17,13 @@ source:
       # the CMake-generated <libasr/config.h>, but the emcc command line was
       # missing the build-tree include dir. To be upstreamed into LFortran.
       - patches/0001-cmake-add-generated-header-dir-to-wasm-runtime-includes.patch
+      - patches/0002-cmake-install-gpu-runtime-sources.patch
   - git: https://github.com/emscripten-core/emsdk.git
     rev: "6.0.9"
     target_directory: emsdk
 
 build:
-  number: 3
+  number: 4
 
 outputs:
   - package:
@@ -95,12 +96,18 @@ outputs:
         script:
           - if: unix
             then: test -f ${PREFIX}/bin/lfortran
+          - if: unix
+            then: test -f ${PREFIX}/share/lfortran/libasr/runtime/lfortran_gpu_metal.m
           - if: win
             then: if not exist %LIBRARY_PREFIX%\bin\lfortran.exe exit 1
+          - if: win
+            then: if not exist %LIBRARY_PREFIX%\libasr\runtime\lfortran_gpu_metal.m exit 1
           - lfortran --help
           - lfortran --version
           - if: unix
             then: echo "print *, 'Hello'; end" > hello.f90 && lfortran hello.f90 && ./hello.out
+          - if: osx
+            then: echo "print *, 'Metal runtime installed'; end" > metal.f90 && lfortran --gpu=metal metal.f90 -o metal && ./metal
           - if: win
             then: echo print *, 'Hello'; end > hello.f90 && lfortran hello.f90 -o hello.exe && hello.exe
           - jupyter kernelspec list --json
