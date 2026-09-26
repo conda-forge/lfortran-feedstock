@@ -88,11 +88,6 @@ outputs:
             - lfortran
           files:
             - share/jupyter/kernels/fortran/kernel.json
-            - share/lfortran/libasr/runtime/lfortran_gpu_metal.m
-            - share/lfortran/libasr/runtime/lfortran_gpu_cuda.cu
-            - share/lfortran/libasr/runtime/lfortran_gpu_cpu.c
-            - share/lfortran/libasr/runtime/cuda_cpu_device.h
-            - share/lfortran/libasr/runtime/lfortran_gpu_runtime.h
       - requirements:
           run:
             - jupyter
@@ -101,8 +96,12 @@ outputs:
         script:
           - if: unix
             then: test -f ${PREFIX}/bin/lfortran
+          - if: unix
+            then: test -f ${PREFIX}/share/lfortran/libasr/runtime/lfortran_gpu_metal.m
           - if: win
             then: if not exist %LIBRARY_PREFIX%\bin\lfortran.exe exit 1
+          - if: win
+            then: if not exist %LIBRARY_PREFIX%\libasr\runtime\lfortran_gpu_metal.m exit 1
           - lfortran --help
           - lfortran --version
           - if: unix
