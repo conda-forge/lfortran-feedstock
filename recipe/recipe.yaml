@@ -17,7 +17,7 @@ source:
     target_directory: emsdk
 
 build:
-  number: 0
+  number: 1
 
 outputs:
   - package:
@@ -92,18 +92,26 @@ outputs:
             then: test -f ${PREFIX}/bin/lfortran
           - if: unix
             then: test -f ${PREFIX}/share/lfortran/libasr/runtime/lfortran_gpu_metal.m
+          - if: unix
+            then: test -f ${PREFIX}/share/lfortran/lib/lfortran_runtime_wasm_emcc.o
           - if: win
             then: if not exist %LIBRARY_PREFIX%\bin\lfortran.exe exit 1
           - if: win
             then: if not exist %LIBRARY_PREFIX%\libasr\runtime\lfortran_gpu_metal.m exit 1
+          - if: win
+            then: if not exist %LIBRARY_PREFIX%\lib\lfortran_runtime_wasm_emcc.o exit 1
           - lfortran --help
           - lfortran --version
           - if: unix
             then: echo "print *, 'Hello'; end" > hello.f90 && lfortran hello.f90 && ./hello.out
+          - if: unix
+            then: echo "print *, 'Hello'; end" > hello_wasm.f90 && lfortran -c --target=wasm32-unknown-emscripten hello_wasm.f90 -o hello_wasm.o && test -f hello_wasm.o
           - if: osx
             then: echo "print *, 'Metal runtime installed'; end" > metal.f90 && lfortran --gpu=metal metal.f90 -o metal && ./metal
           - if: win
             then: echo print *, 'Hello'; end > hello.f90 && lfortran hello.f90 -o hello.exe && hello.exe
+          - if: win
+            then: echo print *, 'Hello'; end > hello_wasm.f90 && lfortran -c --target=wasm32-unknown-emscripten hello_wasm.f90 -o hello_wasm.o && if not exist hello_wasm.o exit 1
           - jupyter kernelspec list --json
           - jupyter kernelspec remove -f fortran
 
