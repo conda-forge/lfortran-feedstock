@@ -12,6 +12,10 @@ recipe:
 source:
   - url: https://github.com/lfortran/lfortran/releases/download/v${{ version }}/${{ name }}-${{ version }}.tar.gz
     sha256: d403dd190819f03b53ee2a2d0f1bc39e33a95f220fe43eaaa466ecdb5a2f060d
+    patches:
+      # test_llvm.cpp calls pthread_getattr_default_np, which the glibc 2.17
+      # sysroot does not declare. To be upstreamed into LFortran.
+      - patches/0001-tests-skip-default-stack-np-before-glibc-2.18.patch
   - git: https://github.com/emscripten-core/emsdk.git
     rev: "6.0.9"
     target_directory: emsdk

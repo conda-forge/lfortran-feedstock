@@ -1,0 +1,30 @@
+Subject: [PATCH] tests: skip the default-stack shrink before glibc 2.18
+
+The streaming-cell test lowers glibc's default thread stack to 512 KiB
+with pthread_getattr_default_np and pthread_setattr_default_np, which
+were added in glibc 2.18. conda-forge compiles against the glibc 2.17
+sysroot, so pthread.h does not declare them and test_llvm.cpp fails to
+compile:
+
+    test_llvm.cpp:6815:21: error: 'pthread_getattr_default_np' was not
+        declared in this scope
+
+Call them only when __GLIBC_PREREQ(2, 18) is true. On the 2.17 sysroot
+the test still runs; it just cannot reproduce the small default stack.
+
+diff --git a/src/lfortran/tests/test_llvm.cpp b/src/lfortran/tests/test_llvm.cpp
+index 5aa16fc..abae98b 100644
+--- a/src/lfortran/tests/test_llvm.cpp
++++ b/src/lfortran/tests/test_llvm.cpp
+@@ -6808,7 +6808,10 @@ TEST_CASE("FortranEvaluator execute: a streaming cell keeps the main thread's st
+         MESSAGE("RLIMIT_STACK is below 8 MiB; skipping");
+         return;
+     }
+-#ifdef __GLIBC__
++// pthread_getattr_default_np and pthread_setattr_default_np were added in
++// glibc 2.18. The conda-forge linux build compiles against the glibc 2.17
++// sysroot, whose pthread.h does not declare them.
++#if defined(__GLIBC_PREREQ) && __GLIBC_PREREQ(2, 18)
+     struct DefaultStack {
+         pthread_attr_t saved;
+         DefaultStack() {
